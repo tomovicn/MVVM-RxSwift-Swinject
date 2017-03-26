@@ -9,5 +9,6 @@ target 'MozzartSport' do
     pod 'Alamofire'
     pod 'AlamofireImage'
     pod 'AlamofireObjectMapper'
+    pod 'RealmSwift'
     pod 'MBProgressHUD'
 end

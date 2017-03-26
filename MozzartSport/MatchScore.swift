@@ -8,14 +8,15 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
-class MatchScore: Mappable {
-    var current: Score?
-    var halfTime: Score?
-    var normalTime: Score?
+class MatchScore: Object, Mappable {
+    dynamic var current: Score?
+    dynamic var halfTime: Score?
+    dynamic var normalTime: Score?
     
-    required init?(map: Map){
-        
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -26,12 +27,12 @@ class MatchScore: Mappable {
     
 }
 
-class Score: Mappable {
-    var homeTeam: Int?
-    var guestTeam: Int?
+class Score: Object, Mappable {
+    dynamic var homeTeam = 0
+    dynamic var guestTeam = 0
     
-    required init?(map: Map){
-        
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {

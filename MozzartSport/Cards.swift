@@ -8,13 +8,14 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
-class CardsGroup: Mappable {
-    var homeTeam: Cards?
-    var guestTeam: Cards?
+class CardsGroup: Object, Mappable {
+    dynamic var homeTeam: Cards?
+    dynamic var guestTeam: Cards?
     
-    required init?(map: Map){
-        
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -24,12 +25,12 @@ class CardsGroup: Mappable {
     
 }
 
-class Cards: Mappable {
-    var yellow: [Card]?
-    var red: [Card]?
+class Cards: Object, Mappable {
+    var yellow = List<Card>()
+    var red = List<Card>()
     
-    required init?(map: Map){
-        
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -39,12 +40,12 @@ class Cards: Mappable {
     
 }
 
-class Card: Mappable {
-    var time: Int?
-    var player: String?
+class Card: Object, Mappable {
+    dynamic var time = 0
+    dynamic var player: String?
     
-    required init?(map: Map){
-        
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {

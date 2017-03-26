@@ -32,7 +32,13 @@ class MatchsController: UIViewController {
             tableView.reloadData()
         }
     }
-    var favouriteMatchs = [Match]()
+    var favouriteMatchs = [Match](){
+        didSet {
+            if segmentedControl.selectedSegmentIndex == 1 {
+                tableView.reloadData()
+            }
+        }
+    }
     var pickerType: PickerType?
     var date = Date()
     var timeFromComponents = (0, 0)
@@ -40,6 +46,10 @@ class MatchsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //get Favourites from Database
+        favouriteMatchs = DBHelper().getFavouriteMatchs()
+        //handle saving to Database on app terminating
+        NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
         setVisuals()
         getScores()
     }
@@ -55,6 +65,11 @@ class MatchsController: UIViewController {
             vc.match = dataSource[(sender as! IndexPath).section]
         }
     }
+    
+    func saveData() {
+        DBHelper().saveFavourites(matchs: favouriteMatchs)
+    }
+    
     
     func setVisuals() {
         tableView.estimatedRowHeight = 250
@@ -185,21 +200,21 @@ extension MatchsController: UITableViewDataSource {
     }
     
     func configure(cell: MatchCell, match: Match) {
-        cell.imgView.af_setImage(withURL: URL(string: Constants.API.Endpoints.image + String(match.categoryId!))!)
+        cell.imgView.af_setImage(withURL: URL(string: Constants.API.Endpoints.image + String(match.categoryId))!)
         
         cell.lblTime.text = match.matchTime
         cell.lblHomeTeam.text = match.homeTeam?.name
         cell.lblGuestTeam.text = match.guestTeam?.name
-        if let homeYellowCards = match.cardsGroup?.homeTeam?.yellow?.count {
+        if let homeYellowCards = match.cardsGroup?.homeTeam?.yellow.count {
             cell.lblHomeYellowCards.text = String(homeYellowCards)
         }
-        if let guestYellowCards = match.cardsGroup?.guestTeam?.yellow?.count {
+        if let guestYellowCards = match.cardsGroup?.guestTeam?.yellow.count {
             cell.lblGuestYellowCards.text = String(guestYellowCards)
         }
-        if let homeRedCards = match.cardsGroup?.homeTeam?.red?.count {
+        if let homeRedCards = match.cardsGroup?.homeTeam?.red.count {
             cell.lblHomeRedCards.text = String(homeRedCards)
         }
-        if let guestRedCards = match.cardsGroup?.guestTeam?.red?.count {
+        if let guestRedCards = match.cardsGroup?.guestTeam?.red.count {
             cell.lblGuestRedCards.text = String(guestRedCards)
         }
         if let homeScoreFirstHalf = match.score?.halfTime?.homeTeam {
@@ -215,9 +230,9 @@ extension MatchsController: UITableViewDataSource {
             cell.lblGuestScore.text = String(guestScore)
         }
         
-        let homeShooters = match.goals?.homeTeam?.map { String($0.time!) + "' " + $0.player! }.joined(separator: ", ")
+        let homeShooters = match.goals?.homeTeam.map { String($0.time) + "' " + $0.player! }.joined(separator: ", ")
         cell.lblHomeShooters.text = homeShooters
-        let guestShooters = match.goals?.guestTeam?.map { String($0.time!) + "' " + $0.player! }.joined(separator: ", ")
+        let guestShooters = match.goals?.guestTeam.map { String($0.time) + "' " + $0.player! }.joined(separator: ", ")
         cell.lblGuestShooters.text = guestShooters
         
         if favouriteMatchs.contains(match) {

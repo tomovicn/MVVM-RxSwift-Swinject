@@ -10,7 +10,6 @@
 		5E688DB8F0A518713D976BE9 /* Pods_MozzartSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF07FF87B6A6C0777F0E2C6 /* Pods_MozzartSport.framework */; };
 		9A98A5B11E86C8B100E18A35 /* SimpleDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5AF1E86C8B100E18A35 /* SimpleDatePicker.m */; };
 		9A98A5B21E86C8B100E18A35 /* SimpleDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A98A5B01E86C8B100E18A35 /* SimpleDatePicker.xib */; };
-		9A98A5B41E86F48200E18A35 /* MatchCast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5B31E86F48200E18A35 /* MatchCast.swift */; };
 		9A98A5B61E86F9EB00E18A35 /* MatchCastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5B51E86F9EB00E18A35 /* MatchCastController.swift */; };
 		9AB3D2591E858FDC0011FB70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2581E858FDC0011FB70 /* AppDelegate.swift */; };
 		9AB3D25E1E858FDC0011FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3D25C1E858FDC0011FB70 /* Main.storyboard */; };
@@ -19,7 +18,7 @@
 		9AB3D2811E85964E0011FB70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2801E85964E0011FB70 /* Constants.swift */; };
 		9AB3D28E1E85E1710011FB70 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D28D1E85E1710011FB70 /* Match.swift */; };
 		9AB3D2901E85E4250011FB70 /* MatchScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D28F1E85E4250011FB70 /* MatchScore.swift */; };
-		9AB3D2921E85E4370011FB70 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2911E85E4370011FB70 /* Goal.swift */; };
+		9AB3D2921E85E4370011FB70 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2911E85E4370011FB70 /* Goals.swift */; };
 		9AB3D2941E85EB6C0011FB70 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2931E85EB6C0011FB70 /* Team.swift */; };
 		9AB3D2961E85EF720011FB70 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2951E85EF720011FB70 /* APIManager.swift */; };
 		9AB3D2981E85EF7A0011FB70 /* LivescoresRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2971E85EF7A0011FB70 /* LivescoresRouter.swift */; };
@@ -27,6 +26,8 @@
 		9AB3D29C1E867AB30011FB70 /* MatchsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D29B1E867AB30011FB70 /* MatchsController.swift */; };
 		9AB3D2A11E8693450011FB70 /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2A01E8693450011FB70 /* MatchCell.swift */; };
 		9AB3D2A31E8698460011FB70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2A21E8698460011FB70 /* Extensions.swift */; };
+		9AE6249D1E87CB7100E9AE9A /* MatchCast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5B31E86F48200E18A35 /* MatchCast.swift */; };
+		9AE6249F1E87DC7E00E9AE9A /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE6249E1E87DC7E00E9AE9A /* DBHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +46,7 @@
 		9AB3D2801E85964E0011FB70 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9AB3D28D1E85E1710011FB70 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		9AB3D28F1E85E4250011FB70 /* MatchScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchScore.swift; sourceTree = "<group>"; };
-		9AB3D2911E85E4370011FB70 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		9AB3D2911E85E4370011FB70 /* Goals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
 		9AB3D2931E85EB6C0011FB70 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		9AB3D2951E85EF720011FB70 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = MozzartSport/APIManager.swift; sourceTree = SOURCE_ROOT; };
 		9AB3D2971E85EF7A0011FB70 /* LivescoresRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LivescoresRouter.swift; path = MozzartSport/LivescoresRouter.swift; sourceTree = SOURCE_ROOT; };
@@ -53,6 +54,7 @@
 		9AB3D29B1E867AB30011FB70 /* MatchsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsController.swift; sourceTree = "<group>"; };
 		9AB3D2A01E8693450011FB70 /* MatchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
 		9AB3D2A21E8698460011FB70 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9AE6249E1E87DC7E00E9AE9A /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		A37A99A7AEF1D5503994CC62 /* Pods-MozzartSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MozzartSport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MozzartSport/Pods-MozzartSport.debug.xcconfig"; sourceTree = "<group>"; };
 		AEF07FF87B6A6C0777F0E2C6 /* Pods_MozzartSport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MozzartSport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D14D370C1EE9846109D1FB64 /* Pods-MozzartSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MozzartSport.release.xcconfig"; path = "Pods/Target Support Files/Pods-MozzartSport/Pods-MozzartSport.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				9A98A5AC1E86C89A00E18A35 /* ThirdParty */,
 				9AB3D2801E85964E0011FB70 /* Constants.swift */,
 				9AB3D2A21E8698460011FB70 /* Extensions.swift */,
+				9AE6249E1E87DC7E00E9AE9A /* DBHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -156,7 +159,7 @@
 				9AB3D28D1E85E1710011FB70 /* Match.swift */,
 				9A98A5B31E86F48200E18A35 /* MatchCast.swift */,
 				9AB3D28F1E85E4250011FB70 /* MatchScore.swift */,
-				9AB3D2911E85E4370011FB70 /* Goal.swift */,
+				9AB3D2911E85E4370011FB70 /* Goals.swift */,
 				9AB3D2931E85EB6C0011FB70 /* Team.swift */,
 				9AB3D2991E8608EF0011FB70 /* Cards.swift */,
 			);
@@ -325,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A98A5B41E86F48200E18A35 /* MatchCast.swift in Sources */,
 				9AB3D2591E858FDC0011FB70 /* AppDelegate.swift in Sources */,
 				9AB3D2981E85EF7A0011FB70 /* LivescoresRouter.swift in Sources */,
 				9AB3D28E1E85E1710011FB70 /* Match.swift in Sources */,
@@ -333,13 +335,15 @@
 				9AB3D2941E85EB6C0011FB70 /* Team.swift in Sources */,
 				9AB3D2901E85E4250011FB70 /* MatchScore.swift in Sources */,
 				9A98A5B61E86F9EB00E18A35 /* MatchCastController.swift in Sources */,
+				9AE6249D1E87CB7100E9AE9A /* MatchCast.swift in Sources */,
 				9A98A5B11E86C8B100E18A35 /* SimpleDatePicker.m in Sources */,
 				9AB3D2811E85964E0011FB70 /* Constants.swift in Sources */,
 				9AB3D2A31E8698460011FB70 /* Extensions.swift in Sources */,
-				9AB3D2921E85E4370011FB70 /* Goal.swift in Sources */,
+				9AB3D2921E85E4370011FB70 /* Goals.swift in Sources */,
 				9AB3D2A11E8693450011FB70 /* MatchCell.swift in Sources */,
 				9AB3D2961E85EF720011FB70 /* APIManager.swift in Sources */,
 				9AB3D29C1E867AB30011FB70 /* MatchsController.swift in Sources */,
+				9AE6249F1E87DC7E00E9AE9A /* DBHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

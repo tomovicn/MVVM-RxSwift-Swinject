@@ -8,28 +8,33 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
-class Match: Mappable {
-    var id: Int?
-    var categoryId: Int?
-    var tournamentId: Int?
-    var homeTeam: Team?
-    var guestTeam: Team?
-    var matchCurrentTime: TimeInterval?
-    var tournamentName: String?
-    var categoryName: String?
-    var winner: Bool?
-    var started: TimeInterval?
-    var periodStarted: TimeInterval?
-    var matchTime: String?
-    var status: String?
-    var statusCode: Int?
-    var score: MatchScore?
-    var goals: Goals?
-    var cardsGroup: CardsGroup?
+class Match: Object, Mappable {
+    dynamic var id = 0
+    dynamic var categoryId = 0
+    dynamic var tournamentId = 0
+    dynamic var homeTeam: Team?
+    dynamic var guestTeam: Team?
+    dynamic var matchCurrentTime = 0.0
+    dynamic var tournamentName: String?
+    dynamic var categoryName: String?
+    dynamic var winner = false
+    dynamic var started = 0.0
+    dynamic var periodStarted = 0.0
+    dynamic var matchTime: String?
+    dynamic var status: String?
+    dynamic var statusCode = 0
+    dynamic var score: MatchScore?
+    dynamic var goals: Goals?
+    dynamic var cardsGroup: CardsGroup?
     
-    required init?(map: Map){
-        
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -54,8 +59,14 @@ class Match: Mappable {
     
 }
 
-extension Match: Equatable {
-    static func ==(lhs: Match, rhs: Match) -> Bool {
-        return lhs.id == rhs.id
+extension Match {
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if object is Match {
+            if let match = object as? Match {
+                return match.id == self.id
+            }
+        }
+        return false
     }
 }

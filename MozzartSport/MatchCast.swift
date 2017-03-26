@@ -11,7 +11,9 @@ import ObjectMapper
 
 class MatchCast: Match {
     
-    
+    required convenience init?(map: Map){
+        self.init()
+    }
     
     override func mapping(map: Map) {
         super.mapping(map: map)

@@ -92,6 +92,10 @@ struct Constants {
     struct Segue {
         static let showMatchCast = "showMatchCast"
     }
+    
+    struct Notifications {
+        static let saveData = "saveData"
+    }
 }
 
 

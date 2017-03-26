@@ -56,3 +56,23 @@ extension UIViewController {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
 }
+
+extension Array where Element: Match {
+    func containsCopy(match: Match) -> Bool {
+        for item in self {
+            if item.id == match.id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func indexOfCopy(match: Match) -> Int {
+        for item in self {
+            if item.id == match.id {
+                return self.index(of: item)!
+            }
+        }
+        return 0
+    }
+}

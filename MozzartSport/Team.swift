@@ -8,13 +8,18 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
-class Team: Mappable {
-    var id: Int?
-    var name: String?
+class Team: Object, Mappable {
+    dynamic var id = 0
+    dynamic var name: String?
     
-    required init?(map: Map){
-        
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    required convenience init?(map: Map){
+        self.init()
     }
     
     func mapping(map: Map) {
