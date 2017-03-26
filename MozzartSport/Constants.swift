@@ -17,7 +17,7 @@ struct Constants {
             static let baseUrl = "http://ws.mozzartsport.com"
             
             static let scores = "/index.php/livescores.json?sport_id=1"
-            static let matchcast = "/matchcasts.json"
+            static let matchcast = "/matchcasts.json?match_id="
             
             static let image = "http://static.mozzartsport.com/images/flags/26x17/"
         }
@@ -85,6 +85,19 @@ struct Constants {
             static let guestTeam = "guest_team"
             static let player = "player"
             static let time = "time"
+        }
+        
+        struct MatchCast {
+            static let comments = "comments"
+        }
+        
+        struct Comment {
+            static let eventId = "event_id"
+            static let eventTypeId = "event_type_id"
+            static let time = "time"
+            static let type = "type"
+            static let text = "text"
+            static let funfact = "funfact"
         }
         
     }

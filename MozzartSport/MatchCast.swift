@@ -6,10 +6,12 @@
 //  Copyright © 2017 Nikola Tomovic. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
+import RealmSwift
 
 class MatchCast: Match {
+    
+    var comments: [String : Comment]?
     
     required convenience init?(map: Map){
         self.init()
@@ -17,6 +19,30 @@ class MatchCast: Match {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
+        comments <- map[Constants.Keys.MatchCast.comments]
+    }
+    
+}
+
+class Comment: Mappable {
+    var eventId: Int?
+    var eventTypeId: Int?
+    var time: String?
+    var type: Int?
+    var text: String?
+    var funfact: Int?
+    
+    required init?(map: Map){
+        
+    }
+    
+    func mapping(map: Map) {
+        eventId <- map[Constants.Keys.Comment.eventId]
+        eventTypeId <- map[Constants.Keys.Comment.eventTypeId]
+        time <- map[Constants.Keys.Comment.time]
+        type <- map[Constants.Keys.Comment.type]
+        text <- map[Constants.Keys.Comment.text]
+        funfact <- map[Constants.Keys.Comment.funfact]
     }
     
 }

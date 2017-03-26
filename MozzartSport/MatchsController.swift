@@ -35,7 +35,7 @@ class MatchsController: UIViewController {
     var favouriteMatchs = [Match](){
         didSet {
             if segmentedControl.selectedSegmentIndex == 1 {
-                tableView.reloadData()
+                dataSource = favouriteMatchs
             }
         }
     }
@@ -48,7 +48,7 @@ class MatchsController: UIViewController {
         super.viewDidLoad()
         //get Favourites from Database
         favouriteMatchs = DBHelper().getFavouriteMatchs()
-        //handle saving to Database on app terminating
+        //handle saving to Database when app goes to background
         NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
         setVisuals()
         getScores()

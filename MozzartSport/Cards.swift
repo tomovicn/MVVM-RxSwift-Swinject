@@ -6,7 +6,6 @@
 //  Copyright © 2017 Nikola Tomovic. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 import RealmSwift
 
@@ -26,16 +25,28 @@ class CardsGroup: Object, Mappable {
 }
 
 class Cards: Object, Mappable {
-    var yellow = List<Card>()
-    var red = List<Card>()
+    let yellow = List<Card>()
+    let red = List<Card>()
     
     required convenience init?(map: Map){
         self.init()
     }
     
     func mapping(map: Map) {
-        yellow <- map[Constants.Keys.Cards.yellow]
-        red <- map[Constants.Keys.Cards.red]
+        var yellowCard: [Card]?
+        yellowCard <- map[Constants.Keys.Cards.yellow]
+        if let yellowCard = yellowCard {
+            for card in yellowCard {
+                yellow.append(card)
+            }
+        }
+        var redCard: [Card]?
+        redCard <- map[Constants.Keys.Cards.red]
+        if let redCard = redCard {
+            for card in redCard {
+                red.append(card)
+            }
+        }
     }
     
 }

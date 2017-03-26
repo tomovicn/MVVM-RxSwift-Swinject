@@ -6,7 +6,6 @@
 //  Copyright © 2017 Nikola Tomovic. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 import RealmSwift
 

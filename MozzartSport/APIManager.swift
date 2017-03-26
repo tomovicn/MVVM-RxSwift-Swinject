@@ -56,17 +56,25 @@ class APIManager
     
     func getMatchCast(matchId: String, succes: @escaping (_ matchcast : MatchCast) -> Void, failure : @escaping ((String) -> Void) ) {
         
-        manager.request(LivescoresRouter.matchcast(matchId: matchId)).validate().responseJSON { (response) in
+//        manager.request(LivescoresRouter.matchcast(matchId: matchId)).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in
+//            switch response.result {
+//            case .success(let matchcast):
+//                succes(matchcast)
+//            case .failure(let error):
+//                failure(error.localizedDescription)
+//            }
+//        }
+        
+        let urlString = Constants.API.Endpoints.baseUrl + Constants.API.Endpoints.matchcast + matchId
+        manager.request(urlString).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in
             switch response.result {
-            case .success:
-                if let JSON = response.result.value as? NSDictionary {
-                    
-                }
+            case .success(let matchcast):
+                succes(matchcast)
             case .failure(let error):
                 failure(error.localizedDescription)
             }
-        
         }
+        
     }
     
 }
