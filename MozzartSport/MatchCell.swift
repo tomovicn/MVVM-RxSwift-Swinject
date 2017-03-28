@@ -41,7 +41,19 @@ class MatchCell: UITableViewCell, Reusable {
     }
 
     override func prepareForReuse() {
-        
+        lblTime.text = ""
+        lblHomeTeam.text = ""
+        lblGuestTeam.text = ""
+        lblHomeYellowCards.text = "-"
+        lblGuestYellowCards.text = "-"
+        lblHomeRedCards.text = "-"
+        lblGuestRedCards.text = "-"
+        lblHomeScoreFirstHalf.text = "-"
+        lblGuestScoreFirstHalf.text = "-"
+        lblHomeScore.text = "-"
+        lblGuestScore.text = "-"
+        lblHomeShooters.text = ""
+        lblGuestShooters.text = ""
     }
     
     @IBAction func favoriteAction(_ sender: AnyObject) {

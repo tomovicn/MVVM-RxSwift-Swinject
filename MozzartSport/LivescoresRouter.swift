@@ -21,8 +21,10 @@ enum LivescoresRouter: URLRequestConvertible {
     var path: String {
         
         switch self {
-        case .scores, .liveScores:
-            return Constants.API.Endpoints.scores
+        case .scores(let fromTime, let untilTime):
+            return Constants.API.Endpoints.scores + "&from_time=" + String(fromTime) + "&until_time=" + String(untilTime)
+        case .liveScores:
+            return Constants.API.Endpoints.scores + "&type=LIVE"
         case .matchcast(let matchId):
             return Constants.API.Endpoints.matchcast + matchId
         }
@@ -45,12 +47,12 @@ enum LivescoresRouter: URLRequestConvertible {
         var urlRequest: URLRequest
         urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
-        switch self {
-        case .liveScores, .scores:
-            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-        default:
-            break
-        }
+//        switch self {
+//        case .liveScores, .scores:
+//            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+//        default:
+//            break
+//        }
         
         return urlRequest
     }
