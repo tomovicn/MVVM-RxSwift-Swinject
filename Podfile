@@ -11,4 +11,6 @@ target 'MozzartSport' do
     pod 'AlamofireObjectMapper'
     pod 'RealmSwift'
     pod 'MBProgressHUD'
+    pod 'Swinject'
+    pod 'SwinjectStoryboard'
 end

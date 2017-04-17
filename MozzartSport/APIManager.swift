@@ -10,11 +10,9 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-class APIManager
+public final class APIManager
 {
-    static let shared = APIManager()
-    
-    private init() { }
+    public init() { }
     
     private let manager: SessionManager = {
         let configuration = URLSessionConfiguration.default

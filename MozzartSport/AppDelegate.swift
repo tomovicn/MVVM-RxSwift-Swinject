@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let container = Container() { container in
+        container.register(APIManager.self) {_ in APIManager()}
+        container.storyboardInitCompleted(MatchsController.self) { r, c in
+            c.apiManager = r.resolve(APIManager.self)!
+        }
+        container.storyboardInitCompleted(MatchCastController.self) { r, c in
+            c.apiManager = r.resolve(APIManager.self)!
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let bundle = Bundle(for: MatchsController.self)
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
+        window?.rootViewController = storyboard.instantiateInitialViewController()
         
         return true
     }

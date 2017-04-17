@@ -15,6 +15,8 @@ class MatchCastController: UIViewController {
     @IBOutlet weak var lblGuestTeam: UILabel!
     @IBOutlet weak var lblResult: UILabel!
     
+    public var apiManager: APIManager?
+    
     public var match: Match?
     var matchCast: MatchCast?{
         didSet {
@@ -66,7 +68,7 @@ class MatchCastController: UIViewController {
     
     func getMatchCast() {
         showProgressHUD()
-        APIManager.shared.getMatchCast(matchId: String((match?.id)!), succes: { (matchcast) in
+        apiManager?.getMatchCast(matchId: String((match?.id)!), succes: { (matchcast) in
                 self.hideProgressHUD()
                 self.matchCast = matchcast
             }) { (error) in

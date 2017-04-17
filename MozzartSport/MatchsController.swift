@@ -22,6 +22,8 @@ class MatchsController: UIViewController {
     @IBOutlet var btnTimeUntil: UIButton!
     @IBOutlet weak var btnReload: UIButton!
     
+    public var apiManager: APIManager?
+    
     var allMatches = [Match]() {
         didSet {
             dataSource = allMatches
@@ -43,6 +45,10 @@ class MatchsController: UIViewController {
     var date = Date()
     var timeFromComponents = (0, 0)
     var timeUntilComponents = (23, 59)
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +97,7 @@ class MatchsController: UIViewController {
     func getScores() {
         showProgressHUD()
         
-        APIManager.shared.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
+        apiManager?.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
             self.hideProgressHUD()
             self.allMatches = matchs
         }) { (error) in
@@ -102,7 +108,7 @@ class MatchsController: UIViewController {
     
     func getLivescores() {
         showProgressHUD()
-        APIManager.shared.getLivescores(succes: { (matchs) in
+        apiManager?.getLivescores(succes: { (matchs) in
             self.hideProgressHUD()
             self.dataSource = matchs
         }) { (error) in
