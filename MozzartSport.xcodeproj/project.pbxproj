@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5E688DB8F0A518713D976BE9 /* Pods_MozzartSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF07FF87B6A6C0777F0E2C6 /* Pods_MozzartSport.framework */; };
+		9A2112491EC4A72300FFC5FE /* MatchsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */; };
+		9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */; };
+		9A21124D1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */; };
 		9A98A5B11E86C8B100E18A35 /* SimpleDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5AF1E86C8B100E18A35 /* SimpleDatePicker.m */; };
 		9A98A5B21E86C8B100E18A35 /* SimpleDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A98A5B01E86C8B100E18A35 /* SimpleDatePicker.xib */; };
 		9A98A5B61E86F9EB00E18A35 /* MatchCastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98A5B51E86F9EB00E18A35 /* MatchCastController.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModel.swift; sourceTree = "<group>"; };
+		9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModelFromMatchs.swift; sourceTree = "<group>"; };
+		9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCellViewModelFromMatch.swift; sourceTree = "<group>"; };
 		9A98A5AD1E86C8B100E18A35 /* MozzartSport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MozzartSport-Bridging-Header.h"; sourceTree = "<group>"; };
 		9A98A5AE1E86C8B100E18A35 /* SimpleDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleDatePicker.h; path = ThirdParty/SimpleDatePicker.h; sourceTree = "<group>"; };
 		9A98A5AF1E86C8B100E18A35 /* SimpleDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleDatePicker.m; path = ThirdParty/SimpleDatePicker.m; sourceTree = "<group>"; };
@@ -89,6 +95,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9A2112471EC4A54200FFC5FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */,
+				9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */,
+				9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		9A98A5AC1E86C89A00E18A35 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +141,7 @@
 				9AB3D2881E85DEAA0011FB70 /* API */,
 				9AB3D28C1E85DF090011FB70 /* Controller */,
 				9AB3D28B1E85DF070011FB70 /* Model */,
+				9A2112471EC4A54200FFC5FE /* ViewModel */,
 				9AB3D29E1E867CC50011FB70 /* View */,
 				9AB3D27F1E8596300011FB70 /* Helpers */,
 				9AB3D29D1E867CAA0011FB70 /* SupportedFiles */,
@@ -330,6 +347,7 @@
 			files = (
 				9AB3D2591E858FDC0011FB70 /* AppDelegate.swift in Sources */,
 				9AB3D2981E85EF7A0011FB70 /* LivescoresRouter.swift in Sources */,
+				9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */,
 				9AB3D28E1E85E1710011FB70 /* Match.swift in Sources */,
 				9AB3D29A1E8608EF0011FB70 /* Cards.swift in Sources */,
 				9AB3D2941E85EB6C0011FB70 /* Team.swift in Sources */,
@@ -337,6 +355,8 @@
 				9A98A5B61E86F9EB00E18A35 /* MatchCastController.swift in Sources */,
 				9AE6249D1E87CB7100E9AE9A /* MatchCast.swift in Sources */,
 				9A98A5B11E86C8B100E18A35 /* SimpleDatePicker.m in Sources */,
+				9A2112491EC4A72300FFC5FE /* MatchsViewModel.swift in Sources */,
+				9A21124D1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift in Sources */,
 				9AB3D2811E85964E0011FB70 /* Constants.swift in Sources */,
 				9AB3D2A31E8698460011FB70 /* Extensions.swift in Sources */,
 				9AB3D2921E85E4370011FB70 /* Goals.swift in Sources */,

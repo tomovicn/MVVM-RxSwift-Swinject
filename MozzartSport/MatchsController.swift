@@ -24,23 +24,7 @@ class MatchsController: UIViewController {
     
     public var apiManager: APIManager?
     
-    var allMatches = [Match]() {
-        didSet {
-            dataSource = allMatches
-        }
-    }
-    var dataSource = [Match]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    var favouriteMatchs = [Match](){
-        didSet {
-            if segmentedControl.selectedSegmentIndex == 1 {
-                dataSource = favouriteMatchs
-            }
-        }
-    }
+    var viewModel: MatchsViewModel = MatchsViewModelFromMatchs(withMatchs: [])
     var pickerType: PickerType?
     var date = Date()
     var timeFromComponents = (0, 0)
@@ -52,8 +36,6 @@ class MatchsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //get Favourites from Database
-        favouriteMatchs = DBHelper().getFavouriteMatchs()
         //handle saving to Database when app goes to background
         NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
         setVisuals()
@@ -67,13 +49,13 @@ class MatchsController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Segue.showMatchCast {
-            let vc = segue.destination as! MatchCastController
-            vc.match = dataSource[(sender as! IndexPath).section]
+            //let vc = segue.destination as! MatchCastController
+            //vc.match = dataSource[(sender as! IndexPath).section]
         }
     }
     
     func saveData() {
-        DBHelper().saveFavourites(matchs: favouriteMatchs)
+        viewModel.saveFavorites()
     }
     
     
@@ -99,7 +81,8 @@ class MatchsController: UIViewController {
         
         apiManager?.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
             self.hideProgressHUD()
-            self.allMatches = matchs
+            self.viewModel = MatchsViewModelFromMatchs(withMatchs: matchs)
+            self.tableView.reloadData()
         }) { (error) in
             self.hideProgressHUD()
             self.showDialog("Error", message: error, cancelButtonTitle: "Ok")
@@ -110,7 +93,8 @@ class MatchsController: UIViewController {
         showProgressHUD()
         apiManager?.getLivescores(succes: { (matchs) in
             self.hideProgressHUD()
-            self.dataSource = matchs
+            self.viewModel.liveMatchs = matchs
+            self.tableView.reloadData()
         }) { (error) in
             self.hideProgressHUD()
             self.showDialog("Error", message: error, cancelButtonTitle: "Ok")
@@ -119,26 +103,12 @@ class MatchsController: UIViewController {
 
     //Segment change action
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        btnReload.isHidden = true
-        switch sender.selectedSegmentIndex {
-        case 0:
-            dataSource = allMatches
-            btnReload.isHidden = false
-        case 1:
-            dataSource = favouriteMatchs
-        case 2:
+        btnReload.isHidden = sender.selectedSegmentIndex != 0
+        viewModel.filterType = FilterType(rawValue: sender.selectedSegmentIndex)!
+        if sender.selectedSegmentIndex == 2 {
             getLivescores()
-        case 3:
-            dataSource = allMatches.filter({ (match) -> Bool in
-                return match.statusCode == 100
-            })
-        case 4:
-            dataSource = allMatches.filter({ (match) -> Bool in
-                return match.statusCode == 0
-            })
-        default:
-            break
         }
+        tableView.reloadData()
     }
     
     //Actions
@@ -190,62 +160,19 @@ class MatchsController: UIViewController {
 extension MatchsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
+        return viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.numberOfRowsFor(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as MatchCell
-        configure(cell: cell, match: dataSource[indexPath.section])
+        cell.viewCellModel = viewModel.viewModelFor(section: indexPath.section, row: indexPath.row)
         cell.delegate = self
         
         return cell
-    }
-    
-    func configure(cell: MatchCell, match: Match) {
-        cell.imgView.af_setImage(withURL: URL(string: Constants.API.Endpoints.image + String(match.categoryId))!)
-        
-        cell.lblTime.text = match.matchTime
-        cell.lblHomeTeam.text = match.homeTeam?.name
-        cell.lblGuestTeam.text = match.guestTeam?.name
-        if let homeYellowCards = match.cardsGroup?.homeTeam?.yellow.count {
-            cell.lblHomeYellowCards.text = String(homeYellowCards)
-        }
-        if let guestYellowCards = match.cardsGroup?.guestTeam?.yellow.count {
-            cell.lblGuestYellowCards.text = String(guestYellowCards)
-        }
-        if let homeRedCards = match.cardsGroup?.homeTeam?.red.count {
-            cell.lblHomeRedCards.text = String(homeRedCards)
-        }
-        if let guestRedCards = match.cardsGroup?.guestTeam?.red.count {
-            cell.lblGuestRedCards.text = String(guestRedCards)
-        }
-        if let homeScoreFirstHalf = match.score?.halfTime?.homeTeam {
-            cell.lblHomeScoreFirstHalf.text = String(homeScoreFirstHalf)
-        }
-        if let guestScoreFirstHalf = match.score?.halfTime?.guestTeam {
-            cell.lblGuestScoreFirstHalf.text = String(guestScoreFirstHalf)
-        }
-        if let homeScore = match.score?.current?.homeTeam {
-            cell.lblHomeScore.text = String(homeScore)
-        }
-        if let guestScore = match.score?.current?.guestTeam {
-            cell.lblGuestScore.text = String(guestScore)
-        }
-        
-        let homeShooters = match.goals?.homeTeam.map { String($0.time) + "' " + $0.player! }.joined(separator: ", ")
-        cell.lblHomeShooters.text = homeShooters
-        let guestShooters = match.goals?.guestTeam.map { String($0.time) + "' " + $0.player! }.joined(separator: ", ")
-        cell.lblGuestShooters.text = guestShooters
-        
-        if favouriteMatchs.contains(match) {
-            cell.btnFavourite.setImage(UIImage.init(named: "favoritesSelected"), for: .normal)
-        } else {
-            cell.btnFavourite.setImage(UIImage.init(named: "favoritesUnselected"), for: .normal)
-        }
     }
     
 }
@@ -262,13 +189,12 @@ extension MatchsController: UITableViewDelegate {
 
 extension MatchsController: CellDelegate {
     func didPressedFavorite(cell: MatchCell) {
-        let indexPath = tableView.indexPath(for: cell)
-        let match = dataSource[(indexPath?.section)!]
-        if favouriteMatchs.contains(match) {
-            favouriteMatchs.remove(at: favouriteMatchs.index(of: match)!)
+        var cellViewModel = cell.viewCellModel
+        if cellViewModel.isFavorite {
+            viewModel.removeFromFavorites(viewCellModel: cellViewModel)
             cell.btnFavourite.setImage(UIImage.init(named: "favoritesUnselected"), for: .normal)
         } else {
-            favouriteMatchs.append(match)
+            viewModel.addToFavorites(viewCellModel: cellViewModel)
             cell.btnFavourite.setImage(UIImage.init(named: "favoritesSelected"), for: .normal)
         }
     }

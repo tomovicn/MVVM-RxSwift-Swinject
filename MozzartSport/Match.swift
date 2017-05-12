@@ -56,10 +56,6 @@ class Match: Object, Mappable {
         cardsGroup <- map[Constants.Keys.Match.cards]
     }
     
-}
-
-extension Match {
-    
     override func isEqual(_ object: Any?) -> Bool {
         if object is Match {
             if let match = object as? Match {
@@ -68,4 +64,5 @@ extension Match {
         }
         return false
     }
+    
 }

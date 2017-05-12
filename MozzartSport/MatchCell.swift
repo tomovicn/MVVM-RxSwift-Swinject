@@ -31,6 +31,11 @@ class MatchCell: UITableViewCell, Reusable {
     @IBOutlet weak var btnFavourite: UIButton!
     
     var delegate: CellDelegate?
+    var viewCellModel: MatchCellViewModel = MatchCellViewModelFromMatch(withMatch: Match()) {
+        didSet {
+            configureCell()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,6 +59,27 @@ class MatchCell: UITableViewCell, Reusable {
         lblGuestScore.text = "-"
         lblHomeShooters.text = ""
         lblGuestShooters.text = ""
+    }
+    
+    func configureCell() {
+        lblTime.text = viewCellModel.matchTime
+        lblHomeTeam.text = viewCellModel.homeTeam
+        lblGuestTeam.text = viewCellModel.guestTeam
+        lblHomeYellowCards.text = viewCellModel.homeYellowCards
+        lblGuestYellowCards.text = viewCellModel.guestYellowCards
+        lblHomeRedCards.text = viewCellModel.homeRedCards
+        lblGuestRedCards.text = viewCellModel.guestRedCards
+        lblHomeScoreFirstHalf.text = viewCellModel.homeScoreFirstHalf
+        lblGuestScoreFirstHalf.text = viewCellModel.guestScoreFirstHalf
+        lblHomeScore.text = viewCellModel.homeScore
+        lblGuestScore.text = viewCellModel.guestScore
+        lblHomeShooters.text = viewCellModel.homeShooters
+        lblGuestShooters.text = viewCellModel.guestShooters
+        if viewCellModel.isFavorite {
+            btnFavourite.setImage(UIImage.init(named: "favoritesSelected"), for: .normal)
+        } else {
+            btnFavourite.setImage(UIImage.init(named: "favoritesUnselected"), for: .normal)
+        }
     }
     
     @IBAction func favoriteAction(_ sender: AnyObject) {
