@@ -17,9 +17,10 @@ class MatchCastController: UIViewController {
     
     public var apiManager: APIManager?
     
-    public var match: Match?
+    public var matchID: String?
     var matchCast: MatchCast?{
         didSet {
+            setVisuals()
             if let comments = matchCast?.comments {
                 for index in 0...(comments.count - 1) {
                     dataSource.append(comments[String(index)]!)
@@ -54,13 +55,13 @@ class MatchCastController: UIViewController {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        lblHomeTeam.text = match?.homeTeam?.name
-        lblGuestTeam.text = match?.guestTeam?.name
+        lblHomeTeam.text = matchCast?.homeTeam?.name
+        lblGuestTeam.text = matchCast?.guestTeam?.name
         var result = ""
-        if let homeScore = match?.score?.current?.homeTeam {
+        if let homeScore = matchCast?.score?.current?.homeTeam {
             result = String(homeScore) + " : "
         }
-        if let guestScore = match?.score?.current?.guestTeam {
+        if let guestScore = matchCast?.score?.current?.guestTeam {
             result = result + String(guestScore)
         }
         lblResult.text = result
@@ -68,7 +69,7 @@ class MatchCastController: UIViewController {
     
     func getMatchCast() {
         showProgressHUD()
-        apiManager?.getMatchCast(matchId: String((match?.id)!), succes: { (matchcast) in
+        apiManager?.getMatchCast(matchId: matchID!, succes: { (matchcast) in
                 self.hideProgressHUD()
                 self.matchCast = matchcast
             }) { (error) in

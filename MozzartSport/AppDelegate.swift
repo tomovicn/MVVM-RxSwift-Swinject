@@ -16,8 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let container = Container() { container in
         container.register(APIManager.self) {_ in APIManager()}
+        container.register(MatchsViewModelFromMatchs.self) { r in
+            MatchsViewModelFromMatchs(apiManager: r.resolve(APIManager.self)!)
+        }
         container.storyboardInitCompleted(MatchsController.self) { r, c in
-            c.apiManager = r.resolve(APIManager.self)!
+            //c.apiManager = r.resolve(APIManager.self)!
+            c.viewModel = r.resolve(MatchsViewModelFromMatchs.self)
         }
         container.storyboardInitCompleted(MatchCastController.self) { r, c in
             c.apiManager = r.resolve(APIManager.self)!

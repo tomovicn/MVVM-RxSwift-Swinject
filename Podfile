@@ -13,4 +13,6 @@ target 'MozzartSport' do
     pod 'MBProgressHUD'
     pod 'Swinject'
     pod 'SwinjectStoryboard'
+    pod 'RxSwift'
+    pod 'RxCocoa'
 end

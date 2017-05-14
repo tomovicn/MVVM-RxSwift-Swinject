@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import RxSwift
 
 enum PickerType {
     case date, timeFrom, timeUntil
@@ -22,13 +23,13 @@ class MatchsController: UIViewController {
     @IBOutlet var btnTimeUntil: UIButton!
     @IBOutlet weak var btnReload: UIButton!
     
-    public var apiManager: APIManager?
+    var viewModel: MatchsViewModel!
     
-    var viewModel: MatchsViewModel = MatchsViewModelFromMatchs(withMatchs: [])
+    private let disposeBag = DisposeBag()
     var pickerType: PickerType?
-    var date = Date()
-    var timeFromComponents = (0, 0)
-    var timeUntilComponents = (23, 59)
+    
+    private var dateFormatter = DateFormatter()
+    private var timeFormatter = DateFormatter()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,8 +39,11 @@ class MatchsController: UIViewController {
         super.viewDidLoad()
         //handle saving to Database when app goes to background
         NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        timeFormatter.dateFormat = "HH:mm"
         setVisuals()
-        getScores()
+        configureBindings()
+        viewModel.startFetch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,15 +53,14 @@ class MatchsController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Segue.showMatchCast {
-            //let vc = segue.destination as! MatchCastController
-            //vc.match = dataSource[(sender as! IndexPath).section]
+            let vc = segue.destination as! MatchCastController
+            vc.matchID = viewModel.matchIDFor(section: (sender as! IndexPath).section)
         }
     }
     
     func saveData() {
         viewModel.saveFavorites()
     }
-    
     
     func setVisuals() {
         tableView.estimatedRowHeight = 250
@@ -68,46 +71,52 @@ class MatchsController: UIViewController {
         segmentedControl.setTitle("U toku", forSegmentAt: 2)
         segmentedControl.setTitle("Zavrsene", forSegmentAt: 3)
         segmentedControl.setTitle("Naredne", forSegmentAt: 4)
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        btnDate.setTitle(formatter.string(from: Date()), for: .normal)
-        
     }
     
-    //Fetch Data
-    func getScores() {
-        showProgressHUD()
+    func configureBindings() {
+        viewModel.isLoading.asObservable()
+            .subscribe(onNext: { isLoading in
+                if isLoading {
+                    self.showProgressHUD()
+                } else {
+                    self.hideProgressHUD()
+                }
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
         
-        apiManager?.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
-            self.hideProgressHUD()
-            self.viewModel = MatchsViewModelFromMatchs(withMatchs: matchs)
-            self.tableView.reloadData()
-        }) { (error) in
-            self.hideProgressHUD()
-            self.showDialog("Error", message: error, cancelButtonTitle: "Ok")
-        }
-    }
-    
-    func getLivescores() {
-        showProgressHUD()
-        apiManager?.getLivescores(succes: { (matchs) in
-            self.hideProgressHUD()
-            self.viewModel.liveMatchs = matchs
-            self.tableView.reloadData()
-        }) { (error) in
-            self.hideProgressHUD()
-            self.showDialog("Error", message: error, cancelButtonTitle: "Ok")
-        }
+        viewModel.errorMessage.asObservable()
+            .subscribe(onNext: { error in
+                if let errorMessage = error {
+                    self.showDialog("Error", message: errorMessage, cancelButtonTitle: "Ok")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.date.asObservable()
+        .subscribe(onNext: { date in
+            self.btnDate.setTitle(self.dateFormatter.string(from: date), for: .normal)
+        })
+        .disposed(by: disposeBag)
+        
+        viewModel.timeFrom.asObservable()
+        .subscribe(onNext: { dateFrom in
+            self.btnTimeFrom.setTitle("Od " + self.timeFormatter.string(from: dateFrom), for: .normal)
+        })
+        .disposed(by: disposeBag)
+        
+        viewModel.timeUntil.asObservable()
+            .subscribe(onNext: { dateUntil in
+                self.btnTimeUntil.setTitle("Od " + self.timeFormatter.string(from: dateUntil), for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
     }
 
     //Segment change action
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         btnReload.isHidden = sender.selectedSegmentIndex != 0
         viewModel.filterType = FilterType(rawValue: sender.selectedSegmentIndex)!
-        if sender.selectedSegmentIndex == 2 {
-            getLivescores()
-        }
         tableView.reloadData()
     }
     
@@ -121,38 +130,13 @@ class MatchsController: UIViewController {
     
     @IBAction func timeAction(_ sender: UIButton) {
         if pickerType == nil {
-            if sender.tag == 0 {
-                pickerType = .timeFrom
-            } else {
-                pickerType = .timeUntil
-            }
+            pickerType = sender.tag == 0 ? .timeFrom : .timeUntil
             SimpleDatePicker.presentTime(in: self, with: self)
         }
     }
     
     @IBAction func refreshData(_ sender: AnyObject) {
-        getScores()
-    }
-    
-    //Data/Time management
-    func timeFromInterval() -> TimeInterval {
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: date)
-        
-        components.hour = timeFromComponents.0
-        components.minute = timeFromComponents.1
-        
-        return gregorian.date(from: components)!.timeIntervalSince1970
-    }
-    
-    func timeUntilInterval() -> TimeInterval {
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: date)
-        
-        components.hour = timeUntilComponents.0
-        components.minute = timeUntilComponents.1
-        
-        return gregorian.date(from: components)!.timeIntervalSince1970
+        viewModel.startFetch()
     }
     
 }
@@ -203,26 +187,15 @@ extension MatchsController: CellDelegate {
 extension MatchsController : SimpleDatePickerDelegate {
     
     func simpleDatePickerDidDismiss(with date: Date!) {
-        self.date = date
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        btnDate.setTitle(formatter.string(from: date), for: UIControlState.normal)
+        viewModel.date.value = date
         pickerType = nil
     }
     
     func simpleDatePickerDidDismiss(withTime date: Date!) {
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        var components = gregorian.components([.hour, .minute], from: date)
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        let time = formatter.string(from: date)
         if pickerType == .timeFrom {
-            timeFromComponents = (components.hour!, components.minute!)
-            btnTimeFrom.setTitle("Od " + time, for: UIControlState.normal)
+            viewModel.timeFrom.value = date
         } else {
-            timeUntilComponents = (components.hour!, components.minute!)
-            btnTimeUntil.setTitle("Do " + time, for: UIControlState.normal)
+            viewModel.timeUntil.value = date
         }
         pickerType = nil
     }

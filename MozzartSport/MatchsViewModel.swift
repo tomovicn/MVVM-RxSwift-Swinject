@@ -7,14 +7,23 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol MatchsViewModel {
-    var liveMatchs: [Match] { get set }
+    var isLoading: Variable<Bool> { get }
+    var errorMessage: Variable<String?> { get }
+    var date: Variable<Date> { get }
+    var timeFrom: Variable<Date> { get }
+    var timeUntil: Variable<Date> { get }
     var filterType: FilterType { get set }
+    
+    func startFetch()
     
     func numberOfSections() -> Int
     func numberOfRowsFor(section: Int) -> Int
     func viewModelFor(section: Int, row: Int) -> MatchCellViewModel
+    func matchIDFor(section: Int) -> String
     func saveFavorites()
     func removeFromFavorites(viewCellModel: MatchCellViewModel)
     func addToFavorites(viewCellModel: MatchCellViewModel)

@@ -12,6 +12,9 @@ PODS:
   - Realm/Headers (2.1.0)
   - RealmSwift (2.1.0):
     - Realm (= 2.1.0)
+  - RxCocoa (3.3.1):
+    - RxSwift (~> 3.3)
+  - RxSwift (3.3.1)
   - Swinject (2.0.0)
   - SwinjectStoryboard (1.0.0):
     - Swinject (= 2.0.0)
@@ -22,6 +25,8 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - MBProgressHUD
   - RealmSwift
+  - RxCocoa
+  - RxSwift
   - Swinject
   - SwinjectStoryboard
 
@@ -33,9 +38,11 @@ SPEC CHECKSUMS:
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
   Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
   RealmSwift: a4d4abbf0088c337cab5b738054395842e4b3052
+  RxCocoa: 7dcb7a1860fc9cd0e23dae67ab105fc2916670b6
+  RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
   Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
   SwinjectStoryboard: 8e0d3c0202b64172bdf915d55e8dc83d9c4e7863
 
-PODFILE CHECKSUM: 26b81f6e49684c80f06560c698fcbc5dfd25aa4e
+PODFILE CHECKSUM: 8a2a89363cc2e0087646cbee7e557d2ba94674fa
 
 COCOAPODS: 1.2.0

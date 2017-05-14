@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 enum FilterType: Int {
     case all = 0
@@ -18,11 +20,18 @@ enum FilterType: Int {
 
 class MatchsViewModelFromMatchs: MatchsViewModel {
     
-    private let allMatchs: [Match]
-    private var dataSource: [Match]
+    private var allMatchs: [Match] = [Match]()
+    private var dataSource: [Match] = [Match]()
     private var favoriteMatchs: [Match]
-    var liveMatchs: [Match] = [Match]()
-    var filterType: FilterType {
+    
+    let apiManager: APIManager
+    var isLoading: Variable<Bool> = Variable(false)
+    var errorMessage: Variable<String?> = Variable(nil)
+    var date: Variable<Date>  = Variable(Date())
+    var timeFrom: Variable<Date> = Variable(Date.defaultTimeFrom())
+    var timeUntil: Variable<Date> = Variable(Date.defaultTimeUntil())
+    
+    var filterType: FilterType = .all {
         didSet {
             switch filterType {
             case .all:
@@ -30,7 +39,7 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
             case .favorites:
                 dataSource = favoriteMatchs
             case .live:
-                dataSource = liveMatchs
+                getLivescores()
             case .finished:
                 dataSource = allMatchs.filter({ (match) -> Bool in
                     return match.statusCode == 100
@@ -42,14 +51,39 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
             }
         }
     }
+    let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
     // MARK: Init
     
-    init(withMatchs matchs: [Match]) {
-        self.allMatchs = matchs
-        self.dataSource = matchs
+    init(apiManager: APIManager) {
+        self.apiManager = apiManager
         self.favoriteMatchs = DBHelper().getFavouriteMatchs()
-        self.filterType = .all
+    }
+    
+    // MARK: Fetch Data
+    func startFetch() {
+        isLoading.value = true
+        
+        apiManager.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
+            self.allMatchs = matchs
+            self.dataSource = matchs
+            self.isLoading.value = false
+        }) { (error) in
+            self.isLoading.value = false
+            self.errorMessage.value = error
+        }
+    }
+    
+    func getLivescores() {
+        isLoading.value = true
+        
+        apiManager.getLivescores(succes: { (matchs) in
+            self.dataSource = matchs
+            self.isLoading.value = false
+        }) { (error) in
+            self.isLoading.value = false
+            self.errorMessage.value = error
+        }
     }
     
     // MARK: Favorites
@@ -85,4 +119,30 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
         return viewCellModel
     }
     
+    func matchIDFor(section: Int) -> String {
+        return String(dataSource[section].id)
+    }
+    
+    // MARK: Data/Time management
+    func timeFromInterval() -> TimeInterval {
+        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: date.value)
+        let timeFromComponents = gregorian.components([.year, .month, .day, .hour, .minute], from: timeFrom.value)
+        
+        components.hour = timeFromComponents.hour
+        components.minute = timeFromComponents.minute
+        
+        return gregorian.date(from: components)!.timeIntervalSince1970
+    }
+    
+    func timeUntilInterval() -> TimeInterval {
+        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: date.value)
+        let timeUntilComponents = gregorian.components([.year, .month, .day, .hour, .minute], from: timeUntil.value)
+        
+        components.hour = timeUntilComponents.hour
+        components.minute = timeUntilComponents.minute
+        
+        return gregorian.date(from: components)!.timeIntervalSince1970
+    }
+    
 }
+

@@ -76,3 +76,25 @@ extension Array where Element: Match {
         return 0
     }
 }
+
+extension Date {
+    static func defaultTimeFrom() -> Date {
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: Date())
+        
+        components.hour = 0
+        components.minute = 0
+        
+        return gregorian.date(from: components)!
+    }
+    
+    static func defaultTimeUntil() -> Date {
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        var components = gregorian.components([.year, .month, .day, .hour, .minute], from: Date())
+        
+        components.hour = 23
+        components.minute = 59
+        
+        return gregorian.date(from: components)!
+    }
+}
