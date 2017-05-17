@@ -18,13 +18,15 @@ protocol MatchsViewModel {
     var timeUntil: Variable<Date> { get }
     var filterType: FilterType { get set }
     
-    func startFetch()
+    func startFetch(refreshDriver: Driver<Void>)
     
+    //TableView
     func numberOfSections() -> Int
     func numberOfRowsFor(section: Int) -> Int
     func viewModelFor(section: Int, row: Int) -> MatchCellViewModel
     func matchIDFor(section: Int) -> String
-    func saveFavorites()
+    
+    //Favorites
     func removeFromFavorites(viewCellModel: MatchCellViewModel)
     func addToFavorites(viewCellModel: MatchCellViewModel)
 }

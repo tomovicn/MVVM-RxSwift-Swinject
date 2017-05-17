@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireObjectMapper
+import RxSwift
 
 public final class APIManager
 {
@@ -36,6 +37,25 @@ public final class APIManager
             }
         }
         
+    }
+    
+    func getScores(fromTime: TimeInterval, untilTime: TimeInterval) -> Observable<[Match]> {
+        let observable = Observable<[Match]>.create { [unowned self] observer in
+            self.manager.request(LivescoresRouter.scores(fromTime: fromTime, untilTime: untilTime)).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
+                
+                switch response.result {
+                case .success(let matchs):
+                    observer.onNext(matchs)
+                    
+                case .failure(let error):
+                    observer.onError(error)
+                }
+            }
+            
+            return Disposables.create()
+        }
+        
+        return observable.shareReplay(1)
     }
     
     func getLivescores(succes: @escaping (_ scores : [Match]) -> Void, failure : @escaping ((String) -> Void) ) {

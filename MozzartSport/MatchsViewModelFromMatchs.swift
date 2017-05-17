@@ -53,25 +53,56 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
     }
     let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
+    private enum MatchsDataEvent {
+        case loading
+        case matchData([Match])
+        case error(Error)
+    }
+    private let disposeBag = DisposeBag()
+    
     // MARK: Init
     
     init(apiManager: APIManager) {
         self.apiManager = apiManager
         self.favoriteMatchs = DBHelper().getFavouriteMatchs()
+        //handle saving to Database when app goes to background
+        NotificationCenter.default.addObserver(self, selector: #selector(saveFavorites), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
     }
     
     // MARK: Fetch Data
-    func startFetch() {
-        isLoading.value = true
+    func startFetch(refreshDriver: Driver<Void>) {
         
-        apiManager.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
+        let scoresEventDriver = refreshDriver
+            .startWith(())
+            .flatMapLatest { _ -> Driver<MatchsDataEvent> in
+                return self.apiManager.getScores(fromTime: self.timeFromInterval(), untilTime: self.timeUntilInterval())
+                        .asDriver(onErrorJustReturn: [])
+                        .map { .matchData($0) }
+                        .startWith(.loading)
+        }
+        
+        scoresEventDriver.asObservable()
+            .subscribe(onNext: { (event) in
+                switch event {
+                case .loading: self.isLoading.value = true
+                case .matchData(let matchs):
+                    self.allMatchs = matchs
+                    self.dataSource = matchs
+                    self.isLoading.value = false
+                default: self.isLoading.value = false
+                }
+            }, onError: { (error) in
+                self.errorMessage.value = error.localizedDescription
+            }).disposed(by: disposeBag)
+        
+        /*apiManager.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
             self.allMatchs = matchs
             self.dataSource = matchs
             self.isLoading.value = false
         }) { (error) in
             self.isLoading.value = false
             self.errorMessage.value = error
-        }
+        }*/
     }
     
     func getLivescores() {
@@ -88,7 +119,7 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
     
     // MARK: Favorites
     
-    func saveFavorites() {
+    @objc func saveFavorites() {
         DBHelper().saveFavourites(matchs: favoriteMatchs)
     }
     

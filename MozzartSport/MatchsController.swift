@@ -37,13 +37,11 @@ class MatchsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //handle saving to Database when app goes to background
-        NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: NSNotification.Name.init(rawValue: Constants.Notifications.saveData), object: nil)
         dateFormatter.dateFormat = "dd.MM.yyyy"
         timeFormatter.dateFormat = "HH:mm"
         setVisuals()
         configureBindings()
-        viewModel.startFetch()
+        viewModel.startFetch(refreshDriver: btnReload.rx.tap.asDriver())
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,10 +54,6 @@ class MatchsController: UIViewController {
             let vc = segue.destination as! MatchCastController
             vc.matchID = viewModel.matchIDFor(section: (sender as! IndexPath).section)
         }
-    }
-    
-    func saveData() {
-        viewModel.saveFavorites()
     }
     
     func setVisuals() {
@@ -133,10 +127,6 @@ class MatchsController: UIViewController {
             pickerType = sender.tag == 0 ? .timeFrom : .timeUntil
             SimpleDatePicker.presentTime(in: self, with: self)
         }
-    }
-    
-    @IBAction func refreshData(_ sender: AnyObject) {
-        viewModel.startFetch()
     }
     
 }
