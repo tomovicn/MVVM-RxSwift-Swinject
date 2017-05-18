@@ -68,42 +68,25 @@ class MatchsController: UIViewController {
     }
     
     func configureBindings() {
-        viewModel.isLoading.asObservable()
-            .subscribe(onNext: { isLoading in
+        
+        viewModel.isLoading.asDriver().drive(onNext: { isLoading in
                 if isLoading {
                     self.showProgressHUD()
                 } else {
                     self.hideProgressHUD()
                 }
                 self.tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
-        viewModel.errorMessage.asObservable()
-            .subscribe(onNext: { error in
+        viewModel.errorMessage.asDriver().drive(onNext: { error in
                 if let errorMessage = error {
                     self.showDialog("Error", message: errorMessage, cancelButtonTitle: "Ok")
                 }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
-        viewModel.date.asObservable()
-        .subscribe(onNext: { date in
-            self.btnDate.setTitle(self.dateFormatter.string(from: date), for: .normal)
-        })
-        .disposed(by: disposeBag)
-        
-        viewModel.timeFrom.asObservable()
-        .subscribe(onNext: { dateFrom in
-            self.btnTimeFrom.setTitle("Od " + self.timeFormatter.string(from: dateFrom), for: .normal)
-        })
-        .disposed(by: disposeBag)
-        
-        viewModel.timeUntil.asObservable()
-            .subscribe(onNext: { dateUntil in
-                self.btnTimeUntil.setTitle("Od " + self.timeFormatter.string(from: dateUntil), for: .normal)
-            })
-            .disposed(by: disposeBag)
+        viewModel.date.asDriver().map { self.dateFormatter.string(from: $0) }.drive(self.btnDate.rx.title(for: .normal)).disposed(by: disposeBag)
+        viewModel.timeFrom.asDriver().map { "Od " + self.timeFormatter.string(from: $0) }.drive(self.btnTimeFrom.rx.title(for: .normal)).disposed(by: disposeBag)
+        viewModel.timeUntil.asDriver().map { "Do " + self.timeFormatter.string(from: $0) }.drive(self.btnTimeUntil.rx.title(for: .normal)).disposed(by: disposeBag)
         
     }
 

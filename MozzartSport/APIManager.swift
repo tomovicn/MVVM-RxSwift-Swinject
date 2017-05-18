@@ -24,20 +24,6 @@ public final class APIManager
         let manager = Alamofire.SessionManager(configuration: configuration)
         return manager
     }()
-
-    func getScores(fromTime: TimeInterval, untilTime: TimeInterval, succes: @escaping (_ scores : [Match]) -> Void, failure : @escaping ((String) -> Void) ) {
-        
-        manager.request(LivescoresRouter.scores(fromTime: fromTime, untilTime: untilTime)).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
-
-            switch response.result {
-            case .success(let matchs):
-                succes(matchs)
-            case .failure(let error):
-                failure(error.localizedDescription)
-            }
-        }
-        
-    }
     
     func getScores(fromTime: TimeInterval, untilTime: TimeInterval) -> Observable<[Match]> {
         let observable = Observable<[Match]>.create { [unowned self] observer in
@@ -46,7 +32,7 @@ public final class APIManager
                 switch response.result {
                 case .success(let matchs):
                     observer.onNext(matchs)
-                    
+                    observer.onCompleted()
                 case .failure(let error):
                     observer.onError(error)
                 }

@@ -76,33 +76,25 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
             .startWith(())
             .flatMapLatest { _ -> Driver<MatchsDataEvent> in
                 return self.apiManager.getScores(fromTime: self.timeFromInterval(), untilTime: self.timeUntilInterval())
-                        .asDriver(onErrorJustReturn: [])
-                        .map { .matchData($0) }
-                        .startWith(.loading)
+                            .map { return  MatchsDataEvent.matchData($0) }
+                            .asDriver(onErrorRecover: { (error)  in
+                                return Driver.just(MatchsDataEvent.error(error))
+                            })
+                            .startWith(.loading)
         }
         
-        scoresEventDriver.asObservable()
-            .subscribe(onNext: { (event) in
+        scoresEventDriver.drive(onNext: { (event) in
                 switch event {
                 case .loading: self.isLoading.value = true
                 case .matchData(let matchs):
                     self.allMatchs = matchs
                     self.dataSource = matchs
                     self.isLoading.value = false
-                default: self.isLoading.value = false
+                case .error(let error):
+                    self.isLoading.value = false
+                    self.errorMessage.value = error.localizedDescription
                 }
-            }, onError: { (error) in
-                self.errorMessage.value = error.localizedDescription
             }).disposed(by: disposeBag)
-        
-        /*apiManager.getScores(fromTime: timeFromInterval(), untilTime: timeUntilInterval(), succes: { (matchs) in
-            self.allMatchs = matchs
-            self.dataSource = matchs
-            self.isLoading.value = false
-        }) { (error) in
-            self.isLoading.value = false
-            self.errorMessage.value = error
-        }*/
     }
     
     func getLivescores() {
