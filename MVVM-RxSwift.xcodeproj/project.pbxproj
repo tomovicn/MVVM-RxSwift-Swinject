@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E688DB8F0A518713D976BE9 /* Pods_MVVM-RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF07FF87B6A6C0777F0E2C6 /* Pods_MVVM-RxSwift.framework */; };
-		7E87046839192E71D86AB69D /* Pods_MVVM_RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F51A93AE44A222BBEE2878 /* Pods_MVVM_RxSwift.framework */; };
 		9A2112491EC4A72300FFC5FE /* MatchsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */; };
 		9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */; };
 		9A21124D1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */; };
@@ -73,8 +71,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E688DB8F0A518713D976BE9 /* Pods_MVVM-RxSwift.framework in Frameworks */,
-				7E87046839192E71D86AB69D /* Pods_MVVM_RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
