@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MatchCastController: UIViewController {
 
@@ -16,6 +17,7 @@ class MatchCastController: UIViewController {
     @IBOutlet weak var lblResult: UILabel!
     
     public var apiManager: APIManager?
+    private let disposeBag = DisposeBag()
     
     public var matchID: String?
     var matchCast: MatchCast?{
@@ -69,13 +71,17 @@ class MatchCastController: UIViewController {
     
     func getMatchCast() {
         showProgressHUD()
-        apiManager?.getMatchCast(matchId: matchID!, succes: { (matchcast) in
+        apiManager?.getMatchCast(matchId: matchID!).subscribe { event in
+            switch event {
+            case .success(let matchcast):
                 self.hideProgressHUD()
                 self.matchCast = matchcast
-            }) { (error) in
+            case .error(let error):
                 self.hideProgressHUD()
-                self.showDialog("Error", message: error, cancelButtonTitle: "Ok")
-        }
+                self.showDialog("Error", message: error.localizedDescription, cancelButtonTitle: "Ok")
+            }
+        }.disposed(by: disposeBag)
+        
     }
     
 }
