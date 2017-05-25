@@ -58,16 +58,6 @@ public final class APIManager
     }
     
     func getMatchCast(matchId: String) -> Single<MatchCast> {
-        
-//        manager.request(LivescoresRouter.matchcast(matchId: matchId)).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in
-//            switch response.result {
-//            case .success(let matchcast):
-//                succes(matchcast)
-//            case .failure(let error):
-//                failure(error.localizedDescription)
-//            }
-//        }
-        
         return Single<MatchCast>.create { [unowned self] observer in
             let urlString = Constants.API.Endpoints.baseUrl + Constants.API.Endpoints.matchcast + matchId
             self.manager.request(urlString).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in

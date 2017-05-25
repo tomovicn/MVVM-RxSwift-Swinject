@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1FF1711ED6D9D20054062F /* MatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */; };
 		9A2112491EC4A72300FFC5FE /* MatchsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */; };
 		9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */; };
 		9A21124D1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		89F51A93AE44A222BBEE2878 /* Pods_MVVM_RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVM_RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCellViewModel.swift; sourceTree = "<group>"; };
 		9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModel.swift; sourceTree = "<group>"; };
 		9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModelFromMatchs.swift; sourceTree = "<group>"; };
 		9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCellViewModelFromMatch.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */,
+				9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */,
 				9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */,
 				9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */,
 			);
@@ -345,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1FF1711ED6D9D20054062F /* MatchCellViewModel.swift in Sources */,
 				9A6411AB1ED312CC00C07923 /* MatchCell.swift in Sources */,
 				9AB3D2981E85EF7A0011FB70 /* LivescoresRouter.swift in Sources */,
 				9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */,
