@@ -26,8 +26,8 @@ public final class APIManager
     }()
     
     func getScores(fromTime: TimeInterval, untilTime: TimeInterval) -> Observable<[Match]> {
-        let observable = Observable<[Match]>.create { [unowned self] observer in
-            self.manager.request(LivescoresRouter.scores(fromTime: fromTime, untilTime: untilTime)).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
+        let observable = Observable<[Match]>.create { [weak self] observer in
+            self?.manager.request(LivescoresRouter.scores(fromTime: fromTime, untilTime: untilTime)).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
                 
                 switch response.result {
                 case .success(let matchs):
@@ -43,8 +43,8 @@ public final class APIManager
     }
     
     func getLivescores() -> Single<[Match]> {
-        return Single<[Match]>.create { [unowned self] observer in
-            self.manager.request(LivescoresRouter.liveScores).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
+        return Single<[Match]>.create { [weak self] observer in
+            self?.manager.request(LivescoresRouter.liveScores).validate().responseArray(keyPath: "livescores") { (response: DataResponse<[Match]>) in
                 
                 switch response.result {
                 case .success(let matchs):
@@ -57,21 +57,22 @@ public final class APIManager
         }
     }
     
-    func getMatchCast(matchId: String) -> Single<MatchCast> {
-        return Single<MatchCast>.create { [unowned self] observer in
+    func getMatchCast(matchId: String) -> Observable<MatchCast> {
+        let observable = Observable<MatchCast>.create { [weak self] observer in
             let urlString = Constants.API.Endpoints.baseUrl + Constants.API.Endpoints.matchcast + matchId
-            self.manager.request(urlString).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in
+            self?.manager.request(urlString).validate().responseObject( keyPath: "matchcast") { (response: DataResponse<MatchCast>) in
                 
                 switch response.result {
                 case .success(let matchcast):
-                    observer(.success(matchcast))
+                    observer.onNext(matchcast)
+                    observer.onCompleted()
                 case .failure(let error):
-                    observer(.error(error))
+                    observer.onError(error)
                 }
             }
             return Disposables.create()
         }
-        
+        return observable.shareReplay(1)
     }
     
 }

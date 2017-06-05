@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A04DA731EE565D500D549C4 /* MatchCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04DA721EE565D500D549C4 /* MatchCastViewModel.swift */; };
+		9A04DA751EE5663500D549C4 /* MatchCastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04DA741EE5663500D549C4 /* MatchCastCellViewModel.swift */; };
+		9A04DA771EE567A900D549C4 /* MatchCastViewModelFromMatchCast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04DA761EE567A900D549C4 /* MatchCastViewModelFromMatchCast.swift */; };
+		9A04DA791EE56BC800D549C4 /* MatchCastCellViewModelFromComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04DA781EE56BC800D549C4 /* MatchCastCellViewModelFromComment.swift */; };
 		9A1FF1711ED6D9D20054062F /* MatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */; };
 		9A2112491EC4A72300FFC5FE /* MatchsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */; };
 		9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */; };
@@ -35,6 +39,10 @@
 
 /* Begin PBXFileReference section */
 		89F51A93AE44A222BBEE2878 /* Pods_MVVM_RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVM_RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A04DA721EE565D500D549C4 /* MatchCastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCastViewModel.swift; sourceTree = "<group>"; };
+		9A04DA741EE5663500D549C4 /* MatchCastCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCastCellViewModel.swift; sourceTree = "<group>"; };
+		9A04DA761EE567A900D549C4 /* MatchCastViewModelFromMatchCast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCastViewModelFromMatchCast.swift; sourceTree = "<group>"; };
+		9A04DA781EE56BC800D549C4 /* MatchCastCellViewModelFromComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCastCellViewModelFromComment.swift; sourceTree = "<group>"; };
 		9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCellViewModel.swift; sourceTree = "<group>"; };
 		9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModel.swift; sourceTree = "<group>"; };
 		9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModelFromMatchs.swift; sourceTree = "<group>"; };
@@ -97,13 +105,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9A2112471EC4A54200FFC5FE /* ViewModel */ = {
+		9A04DA701EE5659C00D549C4 /* MatchsViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				9A2112481EC4A72300FFC5FE /* MatchsViewModel.swift */,
 				9A1FF1701ED6D9D20054062F /* MatchCellViewModel.swift */,
 				9A21124A1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift */,
 				9A21124C1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift */,
+			);
+			name = MatchsViewModel;
+			sourceTree = "<group>";
+		};
+		9A04DA711EE565B500D549C4 /* MatchCastViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9A04DA721EE565D500D549C4 /* MatchCastViewModel.swift */,
+				9A04DA741EE5663500D549C4 /* MatchCastCellViewModel.swift */,
+				9A04DA761EE567A900D549C4 /* MatchCastViewModelFromMatchCast.swift */,
+				9A04DA781EE56BC800D549C4 /* MatchCastCellViewModelFromComment.swift */,
+			);
+			name = MatchCastViewModel;
+			sourceTree = "<group>";
+		};
+		9A2112471EC4A54200FFC5FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9A04DA701EE5659C00D549C4 /* MatchsViewModel */,
+				9A04DA711EE565B500D549C4 /* MatchCastViewModel */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -351,6 +379,7 @@
 				9A1FF1711ED6D9D20054062F /* MatchCellViewModel.swift in Sources */,
 				9A6411AB1ED312CC00C07923 /* MatchCell.swift in Sources */,
 				9AB3D2981E85EF7A0011FB70 /* LivescoresRouter.swift in Sources */,
+				9A04DA731EE565D500D549C4 /* MatchCastViewModel.swift in Sources */,
 				9A21124B1EC5AFE200FFC5FE /* MatchsViewModelFromMatchs.swift in Sources */,
 				9A6411A91ED30EEE00C07923 /* AppDelegate.swift in Sources */,
 				9AB3D28E1E85E1710011FB70 /* Match.swift in Sources */,
@@ -364,9 +393,12 @@
 				9A21124D1EC5B14C00FFC5FE /* MatchCellViewModelFromMatch.swift in Sources */,
 				9AB3D2811E85964E0011FB70 /* Constants.swift in Sources */,
 				9AB3D2A31E8698460011FB70 /* Extensions.swift in Sources */,
+				9A04DA751EE5663500D549C4 /* MatchCastCellViewModel.swift in Sources */,
 				9AB3D2921E85E4370011FB70 /* Goals.swift in Sources */,
 				9AB3D2961E85EF720011FB70 /* APIManager.swift in Sources */,
 				9AB3D29C1E867AB30011FB70 /* MatchsController.swift in Sources */,
+				9A04DA791EE56BC800D549C4 /* MatchCastCellViewModelFromComment.swift in Sources */,
+				9A04DA771EE567A900D549C4 /* MatchCastViewModelFromMatchCast.swift in Sources */,
 				9AE6249F1E87DC7E00E9AE9A /* DBHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,12 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(MatchsViewModelFromMatchs.self) { r in
             MatchsViewModelFromMatchs(apiManager: r.resolve(APIManager.self)!)
         }
+        container.register(MatchCastViewModelFromMatchCast.self) { r in
+            MatchCastViewModelFromMatchCast(apiManager: r.resolve(APIManager.self)!)
+        }
         container.storyboardInitCompleted(MatchsController.self) { r, c in
             //c.apiManager = r.resolve(APIManager.self)!
             c.viewModel = r.resolve(MatchsViewModelFromMatchs.self)
         }
         container.storyboardInitCompleted(MatchCastController.self) { r, c in
-            c.apiManager = r.resolve(APIManager.self)!
+            c.viewModel = r.resolve(MatchCastViewModelFromMatchCast.self)!
         }
     }
 

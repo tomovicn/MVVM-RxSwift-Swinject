@@ -83,7 +83,7 @@ class MatchsViewModelFromMatchs: MatchsViewModel {
                             .startWith(.loading)
         }
         
-        scoresEventDriver.drive(onNext: { (event) in
+        scoresEventDriver.drive(onNext: { event in
                 switch event {
                 case .loading: self.isLoading.value = true
                 case .matchData(let matchs):

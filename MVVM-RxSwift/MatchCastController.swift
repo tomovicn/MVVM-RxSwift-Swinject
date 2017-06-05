@@ -16,32 +16,23 @@ class MatchCastController: UIViewController {
     @IBOutlet weak var lblGuestTeam: UILabel!
     @IBOutlet weak var lblResult: UILabel!
     
-    public var apiManager: APIManager?
+    private var btnRefresh: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: nil)
+    var viewModel: MatchCastViewModel!
     private let disposeBag = DisposeBag()
     
     public var matchID: String?
-    var matchCast: MatchCast?{
-        didSet {
-            setVisuals()
-            if let comments = matchCast?.comments {
-                for index in 0...(comments.count - 1) {
-                    dataSource.append(comments[String(index)]!)
-                }
-                tableView.reloadData()
-            }
-        }
-    }
-    var dataSource = [Comment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setVisuals()
-        getMatchCast()
+        configureBindings()
+        viewModel.getData(refreshDriver: btnRefresh.rx.tap.asDriver(), matchID: matchID!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.setRightBarButton(btnRefresh, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,32 +47,26 @@ class MatchCastController: UIViewController {
     func setVisuals() {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        lblHomeTeam.text = matchCast?.homeTeam?.name
-        lblGuestTeam.text = matchCast?.guestTeam?.name
-        var result = ""
-        if let homeScore = matchCast?.score?.current?.homeTeam {
-            result = String(homeScore) + " : "
-        }
-        if let guestScore = matchCast?.score?.current?.guestTeam {
-            result = result + String(guestScore)
-        }
-        lblResult.text = result
     }
     
-    func getMatchCast() {
-        showProgressHUD()
-        apiManager?.getMatchCast(matchId: matchID!).subscribe { event in
-            switch event {
-            case .success(let matchcast):
+    func configureBindings() {
+        viewModel.isLoading.asDriver().drive(onNext: { isLoading in
+            if isLoading {
+                self.showProgressHUD()
+            } else {
                 self.hideProgressHUD()
-                self.matchCast = matchcast
-            case .error(let error):
-                self.hideProgressHUD()
-                self.showDialog("Error", message: error.localizedDescription, cancelButtonTitle: "Ok")
             }
-        }.disposed(by: disposeBag)
+            self.tableView.reloadData()
+        }).disposed(by: disposeBag)
         
+        viewModel.errorMessage.asDriver().drive(onNext: { error in
+            if let errorMessage = error {
+                self.showDialog("Error", message: errorMessage, cancelButtonTitle: "Ok")
+            }
+        }).disposed(by: disposeBag)
+        viewModel.homeTeam.asDriver().drive(self.lblHomeTeam.rx.text).disposed(by: disposeBag)
+        viewModel.guestTeam.asDriver().drive(self.lblGuestTeam.rx.text).disposed(by: disposeBag)
+        viewModel.result.asDriver().drive(self.lblResult.rx.text).disposed(by: disposeBag)
     }
     
 }
@@ -89,17 +74,18 @@ class MatchCastController: UIViewController {
 extension MatchCastController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return viewModel.numberOfRowsFor(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentarCell")!
-        cell.textLabel?.text = dataSource[indexPath.row].text
-        cell.detailTextLabel?.text = dataSource[indexPath.row].time
+        let viewCellModel = viewModel.viewModelFor(section: indexPath.section, row: indexPath.row)
+        cell.textLabel?.text = viewCellModel.title
+        cell.detailTextLabel?.text = viewCellModel.time
         return cell
     }
 }
