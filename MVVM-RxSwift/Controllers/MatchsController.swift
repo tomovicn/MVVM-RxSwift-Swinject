@@ -16,11 +16,11 @@ enum PickerType {
 
 class MatchsController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBOutlet var btnDate: UIButton!
-    @IBOutlet var btnTimeFrom: UIButton!
-    @IBOutlet var btnTimeUntil: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var btnDate: UIButton!
+    @IBOutlet weak var btnTimeFrom: UIButton!
+    @IBOutlet weak var btnTimeUntil: UIButton!
     @IBOutlet weak var btnReload: UIButton!
     
     var viewModel: MatchsViewModel!

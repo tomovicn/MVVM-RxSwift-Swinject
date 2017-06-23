@@ -14,20 +14,20 @@ protocol CellDelegate {
 
 class MatchCell: UITableViewCell, Reusable {
 
-    @IBOutlet var imgView: UIImageView!
-    @IBOutlet var lblTime: UILabel!
-    @IBOutlet var lblHomeTeam: UILabel!
-    @IBOutlet var lblGuestTeam: UILabel!
-    @IBOutlet var lblHomeYellowCards: UILabel!
-    @IBOutlet var lblGuestYellowCards: UILabel!
-    @IBOutlet var lblHomeRedCards: UILabel!
-    @IBOutlet var lblGuestRedCards: UILabel!
-    @IBOutlet var lblHomeScoreFirstHalf: UILabel!
-    @IBOutlet var lblGuestScoreFirstHalf: UILabel!
-    @IBOutlet var lblHomeScore: UILabel!
-    @IBOutlet var lblGuestScore: UILabel!
-    @IBOutlet var lblHomeShooters: UILabel!
-    @IBOutlet var lblGuestShooters: UILabel!
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblHomeTeam: UILabel!
+    @IBOutlet weak var lblGuestTeam: UILabel!
+    @IBOutlet weak var lblHomeYellowCards: UILabel!
+    @IBOutlet weak var lblGuestYellowCards: UILabel!
+    @IBOutlet weak var lblHomeRedCards: UILabel!
+    @IBOutlet weak var lblGuestRedCards: UILabel!
+    @IBOutlet weak var lblHomeScoreFirstHalf: UILabel!
+    @IBOutlet weak var lblGuestScoreFirstHalf: UILabel!
+    @IBOutlet weak var lblHomeScore: UILabel!
+    @IBOutlet weak var lblGuestScore: UILabel!
+    @IBOutlet weak var lblHomeShooters: UILabel!
+    @IBOutlet weak var lblGuestShooters: UILabel!
     @IBOutlet weak var btnFavourite: UIButton!
     
     var delegate: CellDelegate?
