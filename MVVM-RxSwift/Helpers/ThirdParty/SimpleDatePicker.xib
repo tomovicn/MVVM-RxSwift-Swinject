@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimpleDatePickerOwner">
+            <connections>
+                <outlet property="decoupledView" destination="iN0-l3-epB" id="FB6-em-HnR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SimpleDatePicker">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="UKm-0i-Nu2">
+                    <rect key="frame" x="0.0" y="44" width="320" height="162"/>
+                    <date key="date" timeIntervalSinceReferenceDate="424342241.31145799">
+                        <!--2014-06-13 08:50:41 +0000-->
+                    </date>
+                    <locale key="locale" localeIdentifier="sr-Latn"/>
+                    <connections>
+                        <action selector="datePickerValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="mH4-lr-NYi"/>
+                    </connections>
+                </datePicker>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AI2-Hm-JSr">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="LfW-fT-s1W"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem title="Cancel" id="k6O-mZ-b5o">
+                            <connections>
+                                <action selector="actionBtnCancel:" destination="iN0-l3-epB" id="9AL-Km-cXP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="QoC-Ny-h2e"/>
+                        <barButtonItem title="OK" id="kz4-0x-EmV">
+                            <connections>
+                                <action selector="actionBtnOK:" destination="iN0-l3-epB" id="emo-Xp-Xc5"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="AI2-Hm-JSr" secondAttribute="trailing" id="JZc-OG-Zz4"/>
+                <constraint firstItem="UKm-0i-Nu2" firstAttribute="top" secondItem="AI2-Hm-JSr" secondAttribute="bottom" id="VrZ-c6-o7e"/>
+                <constraint firstAttribute="trailing" secondItem="UKm-0i-Nu2" secondAttribute="trailing" id="buW-E4-qjw"/>
+                <constraint firstItem="AI2-Hm-JSr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="crd-gI-PiG"/>
+                <constraint firstItem="UKm-0i-Nu2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dHe-YD-1zq"/>
+                <constraint firstItem="AI2-Hm-JSr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="edR-Ao-x7z"/>
+                <constraint firstAttribute="bottom" secondItem="UKm-0i-Nu2" secondAttribute="bottom" id="rKS-kw-fjf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnCancel" destination="k6O-mZ-b5o" id="lic-ja-yXM"/>
+                <outlet property="btnOK" destination="kz4-0x-EmV" id="7wl-5B-fzR"/>
+                <outlet property="datePicker" destination="UKm-0i-Nu2" id="Ese-Tp-e1E"/>
+                <outlet property="toolbar" destination="AI2-Hm-JSr" id="KV8-OZ-N2A"/>
+            </connections>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
