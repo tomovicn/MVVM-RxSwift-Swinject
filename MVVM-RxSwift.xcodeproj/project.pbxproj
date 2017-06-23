@@ -26,11 +26,11 @@
 		9A1F1C901EFD4D6C007051FD /* MatchCellViewModelFromMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C881EFD4D6C007051FD /* MatchCellViewModelFromMatch.swift */; };
 		9A1F1C911EFD4D6C007051FD /* MatchsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C891EFD4D6C007051FD /* MatchsViewModel.swift */; };
 		9A1F1C921EFD4D6C007051FD /* MatchsViewModelFromMatchs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C8A1EFD4D6C007051FD /* MatchsViewModelFromMatchs.swift */; };
-		9A1F1C9C1EFD4E05007051FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C941EFD4E05007051FD /* Constants.swift */; };
-		9A1F1C9D1EFD4E05007051FD /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C951EFD4E05007051FD /* DBHelper.swift */; };
-		9A1F1C9E1EFD4E05007051FD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C961EFD4E05007051FD /* Extensions.swift */; };
-		9A1F1C9F1EFD4E05007051FD /* SimpleDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1C9A1EFD4E05007051FD /* SimpleDatePicker.m */; };
-		9A1F1CA01EFD4E05007051FD /* SimpleDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F1C9B1EFD4E05007051FD /* SimpleDatePicker.xib */; };
+		9A1F1CAA1EFD5275007051FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1CA21EFD5275007051FD /* Constants.swift */; };
+		9A1F1CAB1EFD5275007051FD /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1CA31EFD5275007051FD /* DBHelper.swift */; };
+		9A1F1CAC1EFD5275007051FD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1CA41EFD5275007051FD /* Extensions.swift */; };
+		9A1F1CAD1EFD5275007051FD /* SimpleDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F1CA81EFD5275007051FD /* SimpleDatePicker.m */; };
+		9A1F1CAE1EFD5275007051FD /* SimpleDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F1CA91EFD5275007051FD /* SimpleDatePicker.xib */; };
 		9A6411A91ED30EEE00C07923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3D2581E858FDC0011FB70 /* AppDelegate.swift */; };
 		9AB3D25E1E858FDC0011FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3D25C1E858FDC0011FB70 /* Main.storyboard */; };
 		9AB3D2601E858FDC0011FB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3D25F1E858FDC0011FB70 /* Assets.xcassets */; };
@@ -58,13 +58,13 @@
 		9A1F1C881EFD4D6C007051FD /* MatchCellViewModelFromMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCellViewModelFromMatch.swift; sourceTree = "<group>"; };
 		9A1F1C891EFD4D6C007051FD /* MatchsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModel.swift; sourceTree = "<group>"; };
 		9A1F1C8A1EFD4D6C007051FD /* MatchsViewModelFromMatchs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchsViewModelFromMatchs.swift; sourceTree = "<group>"; };
-		9A1F1C941EFD4E05007051FD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		9A1F1C951EFD4E05007051FD /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		9A1F1C961EFD4E05007051FD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		9A1F1C981EFD4E05007051FD /* MVVM-RxSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MVVM-RxSwift-Bridging-Header.h"; sourceTree = "<group>"; };
-		9A1F1C991EFD4E05007051FD /* SimpleDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleDatePicker.h; sourceTree = "<group>"; };
-		9A1F1C9A1EFD4E05007051FD /* SimpleDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDatePicker.m; sourceTree = "<group>"; };
-		9A1F1C9B1EFD4E05007051FD /* SimpleDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleDatePicker.xib; sourceTree = "<group>"; };
+		9A1F1CA21EFD5275007051FD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9A1F1CA31EFD5275007051FD /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		9A1F1CA41EFD5275007051FD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9A1F1CA61EFD5275007051FD /* MVVM-RxSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MVVM-RxSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		9A1F1CA71EFD5275007051FD /* SimpleDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleDatePicker.h; sourceTree = "<group>"; };
+		9A1F1CA81EFD5275007051FD /* SimpleDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDatePicker.m; sourceTree = "<group>"; };
+		9A1F1CA91EFD5275007051FD /* SimpleDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleDatePicker.xib; sourceTree = "<group>"; };
 		9AB3D2551E858FDC0011FB70 /* MVVM-RxSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVVM-RxSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB3D2581E858FDC0011FB70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AB3D25D1E858FDC0011FB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,24 +176,24 @@
 			path = MatchsViewModel;
 			sourceTree = "<group>";
 		};
-		9A1F1C931EFD4E05007051FD /* Helpers */ = {
+		9A1F1CA11EFD5275007051FD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9A1F1C941EFD4E05007051FD /* Constants.swift */,
-				9A1F1C951EFD4E05007051FD /* DBHelper.swift */,
-				9A1F1C961EFD4E05007051FD /* Extensions.swift */,
-				9A1F1C971EFD4E05007051FD /* ThirdParty */,
+				9A1F1CA21EFD5275007051FD /* Constants.swift */,
+				9A1F1CA31EFD5275007051FD /* DBHelper.swift */,
+				9A1F1CA41EFD5275007051FD /* Extensions.swift */,
+				9A1F1CA51EFD5275007051FD /* ThirdParty */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		9A1F1C971EFD4E05007051FD /* ThirdParty */ = {
+		9A1F1CA51EFD5275007051FD /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				9A1F1C981EFD4E05007051FD /* MVVM-RxSwift-Bridging-Header.h */,
-				9A1F1C991EFD4E05007051FD /* SimpleDatePicker.h */,
-				9A1F1C9A1EFD4E05007051FD /* SimpleDatePicker.m */,
-				9A1F1C9B1EFD4E05007051FD /* SimpleDatePicker.xib */,
+				9A1F1CA61EFD5275007051FD /* MVVM-RxSwift-Bridging-Header.h */,
+				9A1F1CA71EFD5275007051FD /* SimpleDatePicker.h */,
+				9A1F1CA81EFD5275007051FD /* SimpleDatePicker.m */,
+				9A1F1CA91EFD5275007051FD /* SimpleDatePicker.xib */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				9A1F1C731EFD4CEF007051FD /* Model */,
 				9A1F1C801EFD4D6C007051FD /* ViewModel */,
 				9AB3D29E1E867CC50011FB70 /* View */,
-				9A1F1C931EFD4E05007051FD /* Helpers */,
+				9A1F1CA11EFD5275007051FD /* Helpers */,
 				9AB3D29D1E867CAA0011FB70 /* SupportedFiles */,
 			);
 			path = "MVVM-RxSwift";
@@ -316,7 +316,7 @@
 				9AB3D2631E858FDC0011FB70 /* LaunchScreen.storyboard in Resources */,
 				9AB3D2601E858FDC0011FB70 /* Assets.xcassets in Resources */,
 				9AB3D25E1E858FDC0011FB70 /* Main.storyboard in Resources */,
-				9A1F1CA01EFD4E05007051FD /* SimpleDatePicker.xib in Resources */,
+				9A1F1CAE1EFD5275007051FD /* SimpleDatePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A1F1C9E1EFD4E05007051FD /* Extensions.swift in Sources */,
+				9A1F1CAC1EFD5275007051FD /* Extensions.swift in Sources */,
 				9A1F1C8D1EFD4D6C007051FD /* MatchCastViewModel.swift in Sources */,
 				9A1F1C8B1EFD4D6C007051FD /* MatchCastCellViewModel.swift in Sources */,
 				9A1F1C921EFD4D6C007051FD /* MatchsViewModelFromMatchs.swift in Sources */,
@@ -386,10 +386,10 @@
 				9A1F1C8C1EFD4D6C007051FD /* MatchCastCellViewModelFromComment.swift in Sources */,
 				9A1F1C721EFD4CB8007051FD /* MatchsController.swift in Sources */,
 				9A1F1C6A1EFD4BF0007051FD /* LivescoresRouter.swift in Sources */,
-				9A1F1C9F1EFD4E05007051FD /* SimpleDatePicker.m in Sources */,
+				9A1F1CAD1EFD5275007051FD /* SimpleDatePicker.m in Sources */,
 				9A1F1C711EFD4CB8007051FD /* MatchCastController.swift in Sources */,
-				9A1F1C9D1EFD4E05007051FD /* DBHelper.swift in Sources */,
-				9A1F1C9C1EFD4E05007051FD /* Constants.swift in Sources */,
+				9A1F1CAB1EFD5275007051FD /* DBHelper.swift in Sources */,
+				9A1F1CAA1EFD5275007051FD /* Constants.swift in Sources */,
 				9A1F1C7F1EFD4CEF007051FD /* Team.swift in Sources */,
 				9A1F1C901EFD4D6C007051FD /* MatchCellViewModelFromMatch.swift in Sources */,
 				9A1F1C691EFD4BF0007051FD /* APIManager.swift in Sources */,
